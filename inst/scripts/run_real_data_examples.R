@@ -19,7 +19,7 @@ export_method_panel <- function(analysis, base_name, width = 12, height = 10) {
       wasserstein = "Wasserstein Symbolic HOMALS",
       hausdorff = "Hausdorff Symbolic HOMALS",
       mca = "Naive MCA benchmark"
-    ))
+    ), category_label_mode = "selected", label_top_n = 2L)
   }
   grDevices::dev.off()
 }
@@ -35,18 +35,7 @@ export_coordinate_tables <- function(analysis, base_name) {
     )
     utils::write.csv(obj, file.path(output_dir, paste0(base_name, "_", nm, "_object_scores.csv")), row.names = FALSE)
 
-    cat_df <- do.call(
-      rbind,
-      lapply(seq_along(fit$y), function(j) {
-        data.frame(
-          variable = fit$variable_names[j],
-          label = fit$category_labels[[j]],
-          dim1 = fit$y[[j]][, 1],
-          dim2 = fit$y[[j]][, 2],
-          stringsAsFactors = FALSE
-        )
-      })
-    )
+    cat_df <- sym_category_plot_table(fit, label_top_n = 2L)
     utils::write.csv(cat_df, file.path(output_dir, paste0(base_name, "_", nm, "_category_scores.csv")), row.names = FALSE)
   }
 }

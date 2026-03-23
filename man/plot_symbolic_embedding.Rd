@@ -10,6 +10,8 @@ plot_symbolic_embedding(
   fit,
   main = NULL,
   show_category_labels = TRUE,
+  category_label_mode = c("selected", "all", "none"),
+  label_top_n = 2L,
   show_object_labels = FALSE,
   object_cex = 0.6,
   category_cex = 1,
@@ -23,6 +25,11 @@ plot_symbolic_embedding(
   \item{main}{Optional plot title.}
   \item{show_category_labels}{Logical flag indicating whether category labels
   should be drawn.}
+  \item{category_label_mode}{Whether to draw no category labels, all category
+  labels, or only a selected subset. The default \code{"selected"} labels the
+  most extreme category points within each variable.}
+  \item{label_top_n}{Number of category labels to show per variable when
+  \code{category_label_mode = "selected"}.}
   \item{show_object_labels}{Logical flag indicating whether object labels
   should be drawn.}
   \item{object_cex}{Point size for object scores.}

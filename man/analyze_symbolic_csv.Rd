@@ -9,6 +9,7 @@ benchmark.
 \usage{
 analyze_symbolic_csv(
   path,
+  response_weights = NULL,
   ndim = 2L,
   methods = c("euclidean", "wasserstein", "hausdorff"),
   max_iter = 80L,
@@ -21,6 +22,9 @@ analyze_symbolic_csv(
 \arguments{
   \item{path}{Path to a CSV file whose symbolic columns are named with the
   pattern \code{Y1_}, \code{Y2_}, and so on.}
+  \item{response_weights}{Optional list of within-set weights, parallel to
+  \code{responses}, or a character string identifying a built-in weighting
+  scheme.}
   \item{ndim}{Target embedding dimension.}
   \item{methods}{Methods to compare.}
   \item{max_iter}{Maximum number of iterations.}

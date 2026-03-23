@@ -1,13 +1,15 @@
 sym_fit_euclidean_core <- function(Z_list, ndim, max_iter, tol, seed, verbose) {
   m <- length(Z_list)
-  X <- sym_init_scores(Z_list, ndim = ndim, seed = seed)
+  d_star <- sym_dstar_weights(Z_list)
+  X <- sym_init_scores(Z_list, ndim = ndim, seed = seed, weights = d_star)
   loss_history <- numeric(max_iter)
   converged <- FALSE
   Y_list <- vector("list", m)
   for (iter in seq_len(max_iter)) {
     Y_list <- lapply(Z_list, function(Z) sym_ginv(crossprod(Z)) %*% crossprod(Z, X))
-    X_tilde <- Reduce(`+`, Map(function(Z, Y) Z %*% Y, Z_list, Y_list)) / m
-    X_new <- sym_center_orthonormalize(X_tilde, ndim = ndim)
+    X_num <- Reduce(`+`, Map(function(Z, Y) Z %*% Y, Z_list, Y_list))
+    X_tilde <- sweep(X_num, 1, pmax(d_star, .Machine$double.eps), "/")
+    X_new <- sym_center_orthonormalize_weighted(X_tilde, weights = d_star, ndim = ndim)
     loss_history[iter] <- sym_loss_euclidean(X_new, Y_list, Z_list)
     if (verbose) {
       message(sprintf("[euclidean] iter=%d loss=%.6f", iter, loss_history[iter]))
@@ -30,13 +32,17 @@ sym_fit_euclidean_core <- function(Z_list, ndim, max_iter, tol, seed, verbose) {
     iterations = iter_final,
     converged = converged,
     loss_history = loss_history[seq_len(iter_final)],
-    objective = sym_loss_euclidean(X, Y_list, Z_list)
+    objective = sym_loss_euclidean(X, Y_list, Z_list),
+    d_star = d_star,
+    tol = tol,
+    max_iter = max_iter
   )
 }
 
 sym_fit_wasserstein_core <- function(Z_list, ndim, max_iter, tol, seed, verbose) {
   m <- length(Z_list)
-  X <- sym_init_scores(Z_list, ndim = ndim, seed = seed)
+  d_star <- sym_dstar_weights(Z_list)
+  X <- sym_init_scores(Z_list, ndim = ndim, seed = seed, weights = d_star)
   loss_history <- numeric(max_iter)
   converged <- FALSE
   Y_list <- vector("list", m)
@@ -53,8 +59,9 @@ sym_fit_wasserstein_core <- function(Z_list, ndim, max_iter, tol, seed, verbose)
       }
       Y
     })
-    X_tilde <- Reduce(`+`, Map(function(Z, Y) Z %*% Y, Z_list, Y_list)) / m
-    X_new <- sym_center_orthonormalize(X_tilde, ndim = ndim)
+    X_num <- Reduce(`+`, Map(function(Z, Y) Z %*% Y, Z_list, Y_list))
+    X_tilde <- sweep(X_num, 1, pmax(d_star, .Machine$double.eps), "/")
+    X_new <- sym_center_orthonormalize_weighted(X_tilde, weights = d_star, ndim = ndim)
     loss_history[iter] <- sym_loss_wasserstein(X_new, Y_list, Z_list)
     if (verbose) {
       message(sprintf("[wasserstein] iter=%d loss=%.6f", iter, loss_history[iter]))
@@ -86,7 +93,10 @@ sym_fit_wasserstein_core <- function(Z_list, ndim, max_iter, tol, seed, verbose)
     iterations = iter_final,
     converged = converged,
     loss_history = loss_history[seq_len(iter_final)],
-    objective = sym_loss_wasserstein(X, Y_list, Z_list)
+    objective = sym_loss_wasserstein(X, Y_list, Z_list),
+    d_star = d_star,
+    tol = tol,
+    max_iter = max_iter
   )
 }
 
@@ -102,14 +112,16 @@ sym_fit_hausdorff_core <- function(Z_list, B_list, ndim, max_iter, tol, seed, ve
   X <- init_fit$x
   Y_prev <- init_fit$y
   m <- length(B_list)
+  d_star <- sym_dstar_weights(Z_list)
   loss_history <- numeric(max_iter)
   converged <- FALSE
   Y_list <- Y_prev
   for (iter in seq_len(max_iter)) {
     A_list <- sym_active_hausdorff(B_list, X, Y_prev)
     Y_list <- Map(function(A, Y_old) sym_update_means_from_matrix(A, X, Y_old), A_list, Y_prev)
-    X_tilde <- Reduce(`+`, Map(function(A, Y) A %*% Y, A_list, Y_list)) / m
-    X_new <- sym_center_orthonormalize(X_tilde, ndim = ndim)
+    X_num <- Reduce(`+`, Map(function(A, Y) A %*% Y, A_list, Y_list))
+    X_tilde <- sweep(X_num, 1, pmax(d_star, .Machine$double.eps), "/")
+    X_new <- sym_center_orthonormalize_weighted(X_tilde, weights = d_star, ndim = ndim)
     loss_history[iter] <- sym_loss_hausdorff(X_new, Y_list, B_list)
     if (verbose) {
       message(sprintf("[hausdorff] iter=%d loss=%.6f", iter, loss_history[iter]))
@@ -132,13 +144,17 @@ sym_fit_hausdorff_core <- function(Z_list, B_list, ndim, max_iter, tol, seed, ve
     iterations = iter_final,
     converged = converged,
     loss_history = loss_history[seq_len(iter_final)],
-    objective = sym_loss_hausdorff(X, Y_list, B_list)
+    objective = sym_loss_hausdorff(X, Y_list, B_list),
+    d_star = d_star,
+    tol = tol,
+    max_iter = max_iter
   )
 }
 
 fit_symhomals <- function(
     responses,
     n_categories = NULL,
+    response_weights = NULL,
     ndim = 2L,
     method = c("euclidean", "wasserstein", "hausdorff"),
     max_iter = 80L,
@@ -148,7 +164,11 @@ fit_symhomals <- function(
   method <- match.arg(method)
   info <- sym_validate_responses(responses, n_categories = n_categories)
   B_list <- sym_binary_matrices(responses, info$n_categories)
-  Z_list <- sym_normalize_binary(B_list)
+  Z_list <- sym_weighted_symbolic_matrices(
+    responses = responses,
+    n_categories = info$n_categories,
+    response_weights = response_weights
+  )
   timer <- proc.time()[3]
   fit <- switch(
     method,
@@ -163,6 +183,7 @@ fit_symhomals <- function(
   fit$B_list <- B_list
   fit$Z_list <- Z_list
   fit$responses <- responses
+  fit$response_weights <- response_weights
   class(fit) <- "symhomals_fit"
   fit
 }
@@ -173,6 +194,8 @@ print.symhomals_fit <- function(x, ...) {
   cat("  dimensions:", x$ndim, "\n")
   cat("  iterations:", x$iterations, "\n")
   cat("  converged: ", x$converged, "\n", sep = "")
+  cat("  tol:       ", format(x$tol, scientific = TRUE), "\n", sep = "")
+  cat("  max_iter:  ", x$max_iter, "\n", sep = "")
   cat("  objective: ", sprintf("%.6f", x$objective), "\n", sep = "")
   cat("  runtime:   ", sprintf("%.3f sec", x$runtime_sec), "\n", sep = "")
   invisible(x)

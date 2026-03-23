@@ -6,7 +6,7 @@ dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 study <- simulate_symhomals_study(
   n_rep = 100L,
   scenarios = c("geometry", "heterogeneous", "sparse"),
-  methods = c("euclidean", "wasserstein", "hausdorff"),
+  methods = c("euclidean", "wasserstein", "hausdorff", "mca"),
   ndim = 2L,
   max_iter = 70L,
   tol = 1e-5,

@@ -3,13 +3,13 @@
 \title{Run the Symbolic HOMALS Simulation Study}
 \description{
 Runs a multi-scenario simulation study comparing Euclidean, Wasserstein, and
-Hausdorff Symbolic HOMALS.
+Hausdorff Symbolic HOMALS together with a naive MCA benchmark.
 }
 \usage{
 simulate_symhomals_study(
   n_rep = 12L,
   scenarios = c("geometry", "heterogeneous", "sparse"),
-  methods = c("euclidean", "wasserstein", "hausdorff"),
+  methods = c("euclidean", "wasserstein", "hausdorff", "mca"),
   ndim = 2L,
   max_iter = 80L,
   tol = 1e-06,
@@ -30,4 +30,3 @@ simulate_symhomals_study(
 \value{
 A list with raw replication-level results and an aggregated summary table.
 }
-

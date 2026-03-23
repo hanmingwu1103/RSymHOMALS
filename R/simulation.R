@@ -77,7 +77,7 @@ sym_evaluate_simulation_fit <- function(fit, sim_data) {
 simulate_symhomals_study <- function(
     n_rep = 12L,
     scenarios = c("geometry", "heterogeneous", "sparse"),
-    methods = c("euclidean", "wasserstein", "hausdorff"),
+    methods = c("euclidean", "wasserstein", "hausdorff", "mca"),
     ndim = 2L,
     max_iter = 80L,
     tol = 1e-6,
@@ -101,16 +101,24 @@ simulate_symhomals_study <- function(
         seed = sim_seed
       )
       for (method in methods) {
-        fit <- fit_symhomals(
-          responses = sim_data$responses,
-          n_categories = sim_data$n_categories,
-          ndim = ndim,
-          method = method,
-          max_iter = max_iter,
-          tol = tol,
-          seed = sim_seed,
-          verbose = FALSE
-        )
+        fit <- if (identical(method, "mca")) {
+          fit_naive_mca(
+            responses = sim_data$responses,
+            n_categories = sim_data$n_categories,
+            ndim = ndim
+          )
+        } else {
+          fit_symhomals(
+            responses = sim_data$responses,
+            n_categories = sim_data$n_categories,
+            ndim = ndim,
+            method = method,
+            max_iter = max_iter,
+            tol = tol,
+            seed = sim_seed,
+            verbose = FALSE
+          )
+        }
         metrics <- sym_evaluate_simulation_fit(fit, sim_data)
         raw_results[[counter]] <- cbind(
           data.frame(
@@ -131,4 +139,3 @@ simulate_symhomals_study <- function(
     summary = sym_summarize_results(raw_results)
   )
 }
-

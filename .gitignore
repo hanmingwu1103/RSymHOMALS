@@ -3,6 +3,7 @@
 .Ruserdata
 *.Rproj.user
 *.tar.gz
+*.Rcheck/
 results/
 figures/
 data/

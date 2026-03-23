@@ -1,15 +1,17 @@
 Package: RSymHOMALS
 Type: Package
 Title: Symbolic HOMALS for Multi-Valued Categorical Data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(person("Han-Ming", "Wu", email = "wuhm@g.nccu.edu.tw", role = c("aut", "cre")),
     person("Chiun-How", "Kao", role = "aut"))
 Author: Han-Ming Wu [aut, cre],
   Chiun-How Kao [aut]
 Maintainer: Han-Ming Wu <wuhm@g.nccu.edu.tw>
 Description: Tools for fitting Symbolic HOMALS models to multi-valued
-    categorical data, comparing Euclidean, Hausdorff, and Wasserstein
-    variants, and running simulation and empirical analyses.
+    categorical data, comparing Euclidean, Hausdorff, Wasserstein, and
+    naive multiple correspondence analysis baselines, and rebuilding the
+    simulation, diagnostic, benchmark, and empirical analyses used in the
+    accompanying manuscript.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

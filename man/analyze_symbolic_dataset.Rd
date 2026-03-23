@@ -9,6 +9,7 @@ dataset and returns a comparison table of objective values and runtime.
 analyze_symbolic_dataset(
   responses,
   n_categories = NULL,
+  response_weights = NULL,
   ndim = 2L,
   methods = c("euclidean", "wasserstein", "hausdorff"),
   max_iter = 80L,
@@ -24,6 +25,9 @@ analyze_symbolic_dataset(
 \arguments{
   \item{responses}{A list of variables containing multi-valued responses.}
   \item{n_categories}{Optional number of categories for each variable.}
+  \item{response_weights}{Optional list of within-set weights, parallel to
+  \code{responses}, or a character string identifying a built-in weighting
+  scheme.}
   \item{ndim}{Target embedding dimension.}
   \item{methods}{Methods to compare.}
   \item{max_iter}{Maximum number of iterations.}

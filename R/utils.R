@@ -67,6 +67,34 @@ sym_validate_responses <- function(responses, n_categories = NULL) {
   list(n = n, m = length(responses), n_categories = as.integer(n_categories))
 }
 
+sym_validate_response_weights <- function(response_weights, responses) {
+  if (is.null(response_weights)) {
+    return(NULL)
+  }
+  if (!is.list(response_weights) || length(response_weights) != length(responses)) {
+    stop("`response_weights` must be NULL or a list with the same length as `responses`.")
+  }
+  for (j in seq_along(responses)) {
+    if (!is.list(response_weights[[j]]) || length(response_weights[[j]]) != length(responses[[j]])) {
+      stop(sprintf("`response_weights[[%d]]` must be a list with one weight vector per object.", j))
+    }
+    for (i in seq_along(responses[[j]])) {
+      w <- response_weights[[j]][[i]]
+      idx <- responses[[j]][[i]]
+      if (length(w) != length(idx)) {
+        stop(sprintf("Weight length mismatch in variable %d, object %d.", j, i))
+      }
+      if (any(!is.finite(w)) || any(w < 0)) {
+        stop(sprintf("Non-finite or negative response weight in variable %d, object %d.", j, i))
+      }
+      if (sum(w) <= 0) {
+        stop(sprintf("Response weights must sum to a positive value in variable %d, object %d.", j, i))
+      }
+    }
+  }
+  response_weights
+}
+
 sym_binary_matrices <- function(responses, n_categories) {
   n <- length(responses[[1L]])
   lapply(seq_along(responses), function(j) {
@@ -78,6 +106,29 @@ sym_binary_matrices <- function(responses, n_categories) {
   })
 }
 
+sym_weighted_symbolic_matrices <- function(responses, n_categories, response_weights = NULL) {
+  n <- length(responses[[1L]])
+  response_weights <- sym_validate_response_weights(response_weights, responses)
+  lapply(seq_along(responses), function(j) {
+    Z <- matrix(0, nrow = n, ncol = n_categories[j])
+    for (i in seq_len(n)) {
+      idx <- unique(as.integer(responses[[j]][[i]]))
+      if (is.null(response_weights)) {
+        weights <- rep(1 / length(idx), length(idx))
+      } else {
+        raw_idx <- as.integer(responses[[j]][[i]])
+        raw_w <- as.numeric(response_weights[[j]][[i]])
+        keep <- !duplicated(raw_idx)
+        idx <- raw_idx[keep]
+        raw_w <- raw_w[keep]
+        weights <- raw_w / sum(raw_w)
+      }
+      Z[i, idx] <- weights
+    }
+    Z
+  })
+}
+
 sym_normalize_binary <- function(B_list) {
   lapply(B_list, function(B) {
     rs <- rowSums(B)
@@ -85,11 +136,77 @@ sym_normalize_binary <- function(B_list) {
   })
 }
 
+sym_dstar_weights <- function(Z_list) {
+  Reduce(`+`, lapply(Z_list, rowSums))
+}
+
 sym_total_cardinality <- function(B_list) {
   Reduce(`+`, lapply(B_list, rowSums))
 }
 
-sym_init_scores <- function(Z_list, ndim, seed = NULL) {
+sym_weighted_center <- function(X, weights) {
+  X <- as.matrix(X)
+  weights <- as.numeric(weights)
+  if (length(weights) != nrow(X)) {
+    stop("`weights` must have length equal to `nrow(X)`.")
+  }
+  weights[!is.finite(weights) | weights < 0] <- 0
+  if (sum(weights) <= 0) {
+    stop("Weighted centering requires positive total mass.")
+  }
+  center <- drop(crossprod(weights, X) / sum(weights))
+  sweep(X, 2, center, "-")
+}
+
+sym_center_orthonormalize_weighted <- function(X, weights, ndim = ncol(X)) {
+  X <- as.matrix(X)
+  n <- nrow(X)
+  weights <- as.numeric(weights)
+  if (length(weights) != n) {
+    stop("`weights` must have length equal to `nrow(X)`.")
+  }
+  weights[!is.finite(weights) | weights < 0] <- 0
+  if (sum(weights) <= 0) {
+    stop("Weighted orthonormalization requires positive total mass.")
+  }
+
+  Xc <- sym_weighted_center(X, weights)
+  active <- weights > 0
+  Xw <- sweep(Xc[active, , drop = FALSE], 1, sqrt(weights[active]), "*")
+  sv <- svd(Xw, nu = min(ndim, nrow(Xw), ncol(Xw)), nv = 0)
+
+  Q <- matrix(0, nrow = n, ncol = 0L)
+  if (length(sv$d)) {
+    U <- sv$u[, seq_len(min(ndim, ncol(sv$u))), drop = FALSE]
+    Q <- matrix(0, nrow = n, ncol = ncol(U))
+    Q[active, ] <- sweep(U, 1, sqrt(weights[active]), "/")
+  }
+
+  attempt <- 0L
+  while (ncol(Q) < ndim && attempt < 100L * max(1L, ndim)) {
+    attempt <- attempt + 1L
+    v <- stats::rnorm(n)
+    v <- sym_weighted_center(matrix(v, ncol = 1L), weights)[, 1L]
+    if (ncol(Q) > 0L) {
+      coeff <- drop(crossprod(Q, weights * v))
+      v <- v - Q %*% coeff
+    }
+    v_norm <- sqrt(sum(weights * v * v))
+    if (is.finite(v_norm) && v_norm > 1e-8) {
+      Q <- cbind(Q, v / v_norm)
+    }
+  }
+
+  if (ncol(Q) < ndim) {
+    stop("Unable to construct a weighted orthonormal basis of the requested dimension.")
+  }
+
+  Xnew <- sqrt(n) * Q[, seq_len(ndim), drop = FALSE]
+  colnames(Xnew) <- paste0("Dim", seq_len(ndim))
+  Xnew
+}
+
+sym_init_scores <- function(Z_list, ndim, seed = NULL, weights = NULL) {
   if (!is.null(seed)) {
     set.seed(seed)
   }
@@ -101,25 +218,14 @@ sym_init_scores <- function(Z_list, ndim, seed = NULL) {
   } else {
     X <- sqrt(nrow(Z)) * sv$u[, seq_len(min(ndim, ncol(sv$u))), drop = FALSE]
   }
-  sym_center_orthonormalize(X, ndim = ndim)
+  if (is.null(weights)) {
+    weights <- rep(1, nrow(Z))
+  }
+  sym_center_orthonormalize_weighted(X, weights = weights, ndim = ndim)
 }
 
 sym_center_orthonormalize <- function(X, ndim = ncol(X)) {
-  X <- as.matrix(X)
-  n <- nrow(X)
-  Xc <- scale(X, center = TRUE, scale = FALSE)
-  sv <- svd(Xc, nu = min(ndim, nrow(Xc), ncol(Xc)), nv = 0)
-  U <- if (length(sv$d)) sv$u else matrix(0, nrow = n, ncol = 0)
-  if (ncol(U) < ndim) {
-    extra <- matrix(stats::rnorm(n * ndim), nrow = n, ncol = ndim)
-    basis <- qr.Q(qr(cbind(U, extra)))
-    U <- basis[, seq_len(ndim), drop = FALSE]
-  } else {
-    U <- U[, seq_len(ndim), drop = FALSE]
-  }
-  Xnew <- sqrt(n) * U
-  colnames(Xnew) <- paste0("Dim", seq_len(ndim))
-  Xnew
+  sym_center_orthonormalize_weighted(X, weights = rep(1, nrow(as.matrix(X))), ndim = ndim)
 }
 
 sym_update_means_from_matrix <- function(A, X, Y_prev = NULL) {
@@ -282,4 +388,26 @@ sym_summarize_results <- function(raw_results) {
     out <- if (is.null(out)) merged else merge(out, merged, by = c("scenario", "method"))
   }
   out[order(out$scenario, out$method), ]
+}
+
+sym_weight_scheme <- function(dataset, scheme = c("uniform", "inverse_frequency")) {
+  scheme <- match.arg(scheme)
+  if (scheme == "uniform") {
+    return(NULL)
+  }
+  if (is.null(dataset$parsed_sets) || is.null(dataset$category_labels)) {
+    stop("`dataset` must contain `parsed_sets` and `category_labels`.")
+  }
+  response_weights <- vector("list", length(dataset$parsed_sets))
+  for (j in seq_along(dataset$parsed_sets)) {
+    labels <- dataset$category_labels[[j]]
+    counts <- table(factor(unlist(dataset$parsed_sets[[j]], use.names = FALSE), levels = labels))
+    inv_freq <- 1 / pmax(as.numeric(counts), 1)
+    names(inv_freq) <- labels
+    response_weights[[j]] <- lapply(dataset$parsed_sets[[j]], function(values) {
+      raw <- inv_freq[values]
+      raw / sum(raw)
+    })
+  }
+  response_weights
 }

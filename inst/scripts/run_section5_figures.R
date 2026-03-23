@@ -4,16 +4,19 @@ result_dir <- file.path(getwd(), "results")
 figure_dir <- file.path(getwd(), "figures")
 dir.create(figure_dir, recursive = TRUE, showWarnings = FALSE)
 
-method_levels <- c("euclidean", "wasserstein", "hausdorff")
+symbolic_method_levels <- c("euclidean", "wasserstein", "hausdorff")
+method_levels <- c("euclidean", "wasserstein", "hausdorff", "mca")
 method_labels <- c(
   euclidean = "Euclidean",
   wasserstein = "Wasserstein",
-  hausdorff = "Hausdorff"
+  hausdorff = "Hausdorff",
+  mca = "Naive MCA"
 )
 method_colors <- c(
   euclidean = "#1f4e79",
   wasserstein = "#c45508",
-  hausdorff = "#6b1f1f"
+  hausdorff = "#6b1f1f",
+  mca = "#4d4d4d"
 )
 
 align_fit_to_truth <- function(fit, sim_data, variable = 1L) {
@@ -55,19 +58,19 @@ geometry_example <- simulate_symbolic_data(
   seed = scenario_seed
 )
 
-geometry_fits <- lapply(seq_along(method_levels), function(i) {
+geometry_fits <- lapply(seq_along(symbolic_method_levels), function(i) {
   fit_symhomals(
     responses = geometry_example$responses,
     n_categories = geometry_example$n_categories,
     ndim = 2L,
-    method = method_levels[i],
+    method = symbolic_method_levels[i],
     max_iter = 70L,
     tol = 1e-5,
     seed = scenario_seed + i,
     verbose = FALSE
   )
 })
-names(geometry_fits) <- method_levels
+names(geometry_fits) <- symbolic_method_levels
 aligned_fits <- lapply(geometry_fits, align_fit_to_truth, sim_data = geometry_example)
 
 grDevices::pdf(file.path(figure_dir, "sim_geometry_maps.pdf"), width = 10.5, height = 8.2)
@@ -77,7 +80,7 @@ plot_map_panel(
   cat_points = geometry_example$true_y[[1]][, 1:2, drop = FALSE],
   main = "True latent map"
 )
-for (method in method_levels) {
+for (method in symbolic_method_levels) {
   aligned <- aligned_fits[[method]]
   plot_map_panel(
     obj_points = aligned$x,

@@ -5,21 +5,57 @@ sym_plot_components <- function(fit) {
   stop("Unsupported fit object.")
 }
 
+sym_category_plot_table <- function(fit, label_top_n = 2L) {
+  comp <- sym_plot_components(fit)
+  Y_list <- comp$y
+  variable_names <- fit$variable_names %||% paste0("Y", seq_along(Y_list))
+  category_labels <- fit$category_labels %||% lapply(Y_list, function(Y) paste0("C", seq_len(nrow(Y))))
+  out <- do.call(
+    rbind,
+    lapply(seq_along(Y_list), function(j) {
+      Y <- Y_list[[j]][, 1:2, drop = FALSE]
+      radius <- sqrt(rowSums(Y^2))
+      rank_desc <- rank(-radius, ties.method = "first")
+      data.frame(
+        variable_index = j,
+        variable = variable_names[j],
+        label = category_labels[[j]],
+        dim1 = Y[, 1],
+        dim2 = Y[, 2],
+        radius = radius,
+        label_rank = rank_desc,
+        label_selected = rank_desc <= min(label_top_n, nrow(Y)),
+        stringsAsFactors = FALSE
+      )
+    })
+  )
+  rownames(out) <- NULL
+  out
+}
+
 plot_symbolic_embedding <- function(
     fit,
     main = NULL,
     show_category_labels = TRUE,
+    category_label_mode = c("selected", "all", "none"),
+    label_top_n = 2L,
     show_object_labels = FALSE,
     object_cex = 0.6,
     category_cex = 1.0,
     legend_cex = 0.8,
     ...) {
+  category_label_mode <- match.arg(category_label_mode)
   comp <- sym_plot_components(fit)
   X <- comp$x
   Y_list <- comp$y
   variable_names <- fit$variable_names %||% paste0("Y", seq_along(Y_list))
   category_labels <- fit$category_labels %||% lapply(Y_list, function(Y) paste0("C", seq_len(nrow(Y))))
   object_labels <- fit$object_labels %||% seq_len(nrow(X))
+  category_table <- sym_category_plot_table(fit, label_top_n = label_top_n)
+
+  if (!isTRUE(show_category_labels)) {
+    category_label_mode <- "none"
+  }
 
   palette_cols <- c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#a6761d")
   pch_vals <- c(17, 15, 18, 0, 2, 5)
@@ -53,10 +89,15 @@ plot_symbolic_embedding <- function(
   for (j in seq_along(Y_list)) {
     Y <- Y_list[[j]][, 1:2, drop = FALSE]
     graphics::points(Y, col = colors[j], pch = pchs[j], cex = category_cex)
-    if (show_category_labels) {
+    if (category_label_mode != "none") {
+      keep <- if (category_label_mode == "all") {
+        rep(TRUE, nrow(Y))
+      } else {
+        category_table$label_selected[category_table$variable_index == j]
+      }
       graphics::text(
-        Y[, 1], Y[, 2],
-        labels = paste0("Y", j, ":", category_labels[[j]]),
+        Y[keep, 1], Y[keep, 2],
+        labels = paste0("Y", j, ":", category_labels[[j]][keep]),
         cex = 0.7,
         pos = 3,
         col = colors[j]
