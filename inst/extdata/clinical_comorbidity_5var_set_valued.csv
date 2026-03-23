@@ -1,45 +1,45 @@
-patient_id,admission_id,Y1_comorbidity_groups,Y2_organ_systems,Y3_cardiovascular_subtypes,Y4_severity_markers,Y5_care_context
-10006,142345,"{Cardiac_arrhythmia,Hypertension}","{Cardiovascular,Nervous,Infectious}","{Arrhythmia,Hypertension}","{Coagulopathy,Anaemia}","{Drug_resistant_organism,External_cause}"
-10011,105331,{Liver_disease},"{Digestive,Infectious}",{none},{none},{none}
-10013,165520,{Cardiac_arrhythmia},"{Cardiovascular,Respiratory,Blood}",{Arrhythmia},{Anaemia},{none}
-10017,199207,"{Coronary_artery_disease,Diabetes}","{Cardiovascular,Respiratory,Blood}",{CAD},"{Respiratory_failure,Anaemia}","{External_cause,Drug_resistant_organism}"
-10019,177759,{Pulmonary_disease},"{Respiratory,Digestive}",{none},{none},{none}
-10026,103770,"{Hypertension,Cerebrovascular}","{Cardiovascular,Nervous,Genitourinary}","{Stroke,Hypertension}",{Anaemia},"{Personal_history_disease,External_cause}"
-10027,199395,"{Cardiac_arrhythmia,Congestive_heart_failure,Diabetes,Renal_disease}","{Cardiovascular,Digestive,Endocrine}","{Heart_failure,Arrhythmia,CAD}",{none},{none}
-10029,132349,"{Congestive_heart_failure,Hypertension,Renal_disease,Sepsis_infection}","{Cardiovascular,Digestive,Respiratory}","{Heart_failure,Hypertension}","{Respiratory_failure,Coagulopathy}","{External_cause,Personal_history_disease,Drug_resistant_organism}"
-10032,140372,"{Congestive_heart_failure,Cancer}","{Cardiovascular,Neoplasm}",{Heart_failure},{Anaemia},{none}
-10033,157235,"{Cardiac_arrhythmia,Diabetes,Mental_disorder}","{Cardiovascular,Endocrine,Mental}","{Arrhythmia,Cerebrovascular}",{none},{External_cause}
-10035,110244,"{Cerebrovascular,Coronary_artery_disease}","{Cardiovascular,Nervous}","{Stroke,CAD}",{none},{none}
-10036,189483,{Mental_disorder},"{Mental,Musculoskeletal,Endocrine}",{none},{none},{none}
-10038,111115,"{Cardiac_arrhythmia,Congestive_heart_failure,Renal_disease,Sepsis_infection}","{Cardiovascular,Musculoskeletal,Nervous}","{Heart_failure,Arrhythmia}","{Severe_sepsis,Acute_renal_failure,Coagulopathy,Anaemia}","{External_cause,Drug_resistant_organism}"
-10040,157839,"{Cardiac_arrhythmia,Coronary_artery_disease,Congestive_heart_failure}","{Cardiovascular,Digestive,Symptoms}","{Heart_failure,Arrhythmia,CAD,Hypertension}",{Anaemia},{none}
-10042,148562,"{Cardiac_arrhythmia,Congestive_heart_failure,Coronary_artery_disease}",{Cardiovascular},"{Heart_failure,Arrhythmia,CAD,PE/DVT}",{none},{none}
-10043,168674,{Congestive_heart_failure},"{Cardiovascular,Respiratory,Blood}",{Heart_failure},{Coagulopathy},{none}
-10044,124073,"{Cardiac_arrhythmia,Coronary_artery_disease}","{Cardiovascular,Neoplasm,Blood}","{CAD,Arrhythmia}",{Anaemia},{none}
-10045,126949,"{Cardiac_arrhythmia,Congestive_heart_failure,Coronary_artery_disease,Diabetes,Cerebrovascular,Sepsis_infection}","{Cardiovascular,Infectious,Neoplasm,Nervous}","{Heart_failure,Arrhythmia,CAD,Stroke,Hypertension,Peripheral_vascular}","{Coagulopathy,Anaemia}","{External_cause,Personal_history_disease,Drug_resistant_organism}"
-10046,133110,{Cancer},"{Neoplasm,Symptoms}",{none},{none},"{Personal_history_disease,External_cause}"
-10056,100375,"{Sepsis_infection,Renal_disease}","{Cardiovascular,Nervous,Genitourinary}",{none},"{Severe_sepsis,Acute_renal_failure}",{none}
-10059,122098,"{Liver_disease,Sepsis_infection}","{Cardiovascular,Digestive,Nervous,Symptoms}",{none},"{Severe_sepsis,Respiratory_failure,Acute_renal_failure}",{none}
-10059,142582,{Liver_disease},"{Digestive,Symptoms}",{Hypertension},{none},{none}
-10061,145203,"{Coronary_artery_disease,Congestive_heart_failure,Sepsis_infection}","{Cardiovascular,Digestive,Respiratory}","{CAD,Heart_failure}",{Respiratory_failure},{none}
-10064,111761,{Cardiac_arrhythmia},"{Cardiovascular,Injury}",{Arrhythmia},{none},{External_cause}
-10065,183314,"{Cancer,Renal_disease}","{Neoplasm,Musculoskeletal,Digestive}",{none},{none},{none}
-10067,160442,{Blood_disorder},"{Blood,Injury}",{none},{Anaemia},{External_cause}
-10069,146672,"{Congestive_heart_failure,Mental_disorder}","{Nervous,Respiratory,Digestive}",{Heart_failure},{none},{none}
-10074,170119,"{Cardiac_arrhythmia,Congestive_heart_failure,Pulmonary_disease}","{Cardiovascular,Digestive,Respiratory}","{Heart_failure,Arrhythmia}","{Acute_renal_failure,Anaemia}",{External_cause}
-10076,198503,"{Sepsis_infection,Cancer,Respiratory_failure}","{Respiratory,Neoplasm,Blood}",{none},"{Severe_sepsis,Respiratory_failure,Anaemia}",{External_cause}
-10083,134993,"{Congestive_heart_failure,Metabolic_disorder,Mental_disorder}","{Cardiovascular,Digestive,Endocrine,Mental}",{Heart_failure},"{Coagulopathy,Anaemia}","{External_cause,Drug_resistant_organism,Personal_history_disease}"
-10088,149044,"{Coronary_artery_disease,Hypertension,Renal_disease,Sepsis_infection}","{Cardiovascular,Nervous,Genitourinary}","{CAD,Hypertension,Peripheral_vascular}","{Severe_sepsis,Acute_renal_failure,Anaemia}","{Prior_procedure,Drug_resistant_organism,Personal_history_disease}"
-10088,168233,"{Congestive_heart_failure,Coronary_artery_disease,Mental_disorder,Pulmonary_disease}","{Cardiovascular,Digestive,Respiratory,Mental}","{Heart_failure,CAD,Arrhythmia,Peripheral_vascular}","{Respiratory_failure,Anaemia,Acute_renal_failure}","{Prior_procedure,Drug_resistant_organism,Personal_history_disease}"
-10088,169938,"{Coronary_artery_disease,Hypertension,Mental_disorder,Renal_disease}","{Cardiovascular,Genitourinary,Respiratory,Mental}","{CAD,Hypertension,Peripheral_vascular}","{Severe_sepsis,Respiratory_failure,Anaemia}","{Prior_procedure,Drug_resistant_organism,Personal_history_disease}"
-10089,190301,"{Coronary_artery_disease,Cerebrovascular}","{Cardiovascular,Digestive}","{Stroke,CAD,Hypertension}",{none},{Prior_procedure}
-10090,176805,{Mental_disorder},"{Mental,Symptoms}",{none},{Anaemia},{External_cause}
-10093,165393,"{Coronary_artery_disease,Renal_disease,Metabolic_disorder}","{Cardiovascular,Endocrine}","{CAD,Hypertension}","{Acute_renal_failure,Anaemia}",{none}
-10094,122928,{Sepsis_infection},"{Cardiovascular,Digestive,Respiratory,Nervous}",{none},{Acute_renal_failure},{none}
-10094,168074,"{Renal_disease,Metabolic_disorder}","{Cardiovascular,Respiratory,Endocrine}",{none},{Acute_renal_failure},{none}
-10098,180685,{none},{Injury},{none},{none},{External_cause}
+patient_id,admission_id,Y1_comorbidity_groups,Y2_organ_systems,Y3_cardiovascular_subtypes,Y4_severity_markers,Y5_care_context_flags
+10006,142345,"{Blood_disorder, Cardiac_arrhythmia, Congestive_heart_failure, Diabetes, Hypertension, Metabolic_disorder, Sepsis_infection}","{Blood, Cardiovascular, Digestive, Endocrine, Infectious, Injury, Mental, Symptoms}","{Arrhythmia, Heart_failure}","{Anaemia, Coagulopathy, Severe_sepsis}","{Drug_resistant_organism, External_cause}"
+10011,105331,"{Blood_disorder, Metabolic_disorder}","{Blood, Endocrine, Infectious, Mental}",{none},{Coagulopathy},{none}
+10013,165520,"{Cancer, Cardiac_arrhythmia, Coronary_artery_disease, Metabolic_disorder, Sepsis_infection}","{Cardiovascular, Endocrine, Infectious, Neoplasm, Symptoms}","{Arrhythmia, CAD}",{none},{none}
+10017,199207,"{Blood_disorder, Diabetes, Hypertension, Metabolic_disorder, Pulmonary_disease}","{Blood, Cardiovascular, Endocrine, Infectious, Injury, Respiratory}","{Hypertension, PE/DVT}",{Anaemia},"{External_cause, Personal_history_disease}"
+10019,177759,"{Blood_disorder, Hypertension, Liver_disease, Pulmonary_disease, Sepsis_infection}","{Blood, Cardiovascular, Digestive, Genitourinary, Infectious, Injury, Mental, Musculoskeletal, Respiratory, Symptoms}",{Hypertension},"{Respiratory_failure, Severe_sepsis}",{none}
+10026,103770,"{Blood_disorder, Hypertension, Metabolic_disorder}","{Blood, Cardiovascular, Endocrine, Genitourinary, Infectious, Nervous}",{Hypertension},{Anaemia},{Personal_history_disease}
+10027,199395,"{Cardiac_arrhythmia, Congestive_heart_failure, Diabetes, Hypertension, Mental_disorder, Renal_disease}","{Cardiovascular, Digestive, Endocrine, Genitourinary, Mental, Symptoms}","{Arrhythmia, Heart_failure, Hypertension}",{Acute_renal_failure},{none}
+10029,132349,"{Blood_disorder, Cancer, Cardiac_arrhythmia, Congestive_heart_failure, Hypertension, Mental_disorder, Renal_disease, Sepsis_infection}","{Blood, Cardiovascular, Digestive, Genitourinary, Infectious, Injury, Mental, Musculoskeletal, Neoplasm, Respiratory, Symptoms}","{Arrhythmia, Heart_failure}","{Acute_renal_failure, Coagulopathy, Respiratory_failure, Septic_shock, Severe_sepsis}","{Allergy_personal_hx, Personal_history_disease, Prior_procedure}"
+10032,140372,"{Blood_disorder, Cancer, Congestive_heart_failure, Metabolic_disorder}","{Blood, Cardiovascular, Endocrine, Genitourinary, Injury, Neoplasm, Respiratory}",{Heart_failure},"{Acute_renal_failure, Anaemia, Coagulopathy, Systolic_heart_failure}",{none}
+10033,157235,"{Cardiac_arrhythmia, Cerebrovascular, Diabetes, Hypertension, Mental_disorder, Metabolic_disorder}","{Cardiovascular, Digestive, Endocrine, Genitourinary, Infectious, Respiratory}","{Arrhythmia, Hypertension, Stroke}",{Acute_renal_failure},{External_cause}
+10035,110244,"{Cerebrovascular, Coronary_artery_disease, Metabolic_disorder}","{Cardiovascular, Endocrine, Genitourinary, Infectious}","{CAD, Stroke}",{none},{none}
+10036,189483,"{Mental_disorder, Metabolic_disorder, Sepsis_infection}","{Digestive, Endocrine, Genitourinary, Infectious, Injury, Mental, Nervous, Respiratory, Symptoms}",{none},"{Acute_renal_failure, Septic_shock, Severe_sepsis}",{none}
+10038,111115,"{Blood_disorder, Cardiac_arrhythmia, Congestive_heart_failure, Hypertension, Mental_disorder, Metabolic_disorder, Sepsis_infection}","{Blood, Cardiovascular, Endocrine, Genitourinary, Infectious, Injury, Mental, Musculoskeletal, Symptoms}","{Arrhythmia, Heart_failure, Hypertension}","{Acute_renal_failure, Coagulopathy, Severe_sepsis, Systolic_heart_failure}",{External_cause}
+10040,157839,"{Blood_disorder, Congestive_heart_failure, Hypertension, Pulmonary_disease}","{Blood, Cardiovascular, Digestive, Respiratory, Symptoms}",{Heart_failure},"{Anaemia, Respiratory_failure}",{none}
+10042,148562,"{Cardiac_arrhythmia, Congestive_heart_failure, Coronary_artery_disease}","{Cardiovascular, Injury}","{Arrhythmia, CAD, Heart_failure, Peripheral_vascular}",{none},{none}
+10043,168674,"{Blood_disorder, Congestive_heart_failure, Pulmonary_disease}","{Blood, Cardiovascular, Infectious, Respiratory}",{Heart_failure},"{Anaemia, Coagulopathy, Respiratory_failure, Systolic_heart_failure}",{none}
+10044,124073,"{Blood_disorder, Cancer, Cardiac_arrhythmia, Hypertension}","{Blood, Cardiovascular, Genitourinary, Neoplasm}","{Arrhythmia, Hypertension}",{Anaemia},{none}
+10045,126949,"{Blood_disorder, Cardiac_arrhythmia, Congestive_heart_failure, Coronary_artery_disease, Diabetes, Hypertension, Metabolic_disorder, Sepsis_infection}","{Blood, Cardiovascular, Digestive, Endocrine, Genitourinary, Infectious, Injury, Symptoms}","{Arrhythmia, CAD, Heart_failure, Hypertension, Peripheral_vascular}","{Acute_renal_failure, Anaemia, Septic_shock, Severe_sepsis}","{Allergy_personal_hx, Personal_history_disease, Prior_procedure}"
+10046,133110,{Cancer},"{Neoplasm, Symptoms}",{none},{none},{Personal_history_disease}
+10056,100375,"{Congestive_heart_failure, Metabolic_disorder, Sepsis_infection}","{Cardiovascular, Endocrine, Genitourinary, Infectious, Injury, Symptoms}",{Heart_failure},"{Septic_shock, Severe_sepsis, Systolic_heart_failure}",{none}
+10059,122098,"{Blood_disorder, Liver_disease, Renal_disease, Sepsis_infection}","{Blood, Cardiovascular, Digestive, Genitourinary, Infectious, Injury, Respiratory, Symptoms}",{none},"{Acute_renal_failure, Anaemia, Respiratory_failure, Septic_shock, Severe_sepsis}",{none}
+10059,142582,"{Blood_disorder, Hypertension, Liver_disease}","{Blood, Cardiovascular, Digestive, Genitourinary, Infectious, Symptoms}",{Hypertension},"{Acute_renal_failure, Anaemia, Coagulopathy}",{none}
+10061,145203,"{Congestive_heart_failure, Coronary_artery_disease, Sepsis_infection}","{Cardiovascular, Genitourinary, Infectious, Respiratory, Symptoms}","{CAD, Heart_failure}","{Acute_renal_failure, Respiratory_failure}",{none}
+10064,111761,{Cardiac_arrhythmia},"{Cardiovascular, Injury}",{Arrhythmia},{none},{External_cause}
+10065,183314,"{Cancer, Hypertension, Metabolic_disorder, Renal_disease}","{Cardiovascular, Digestive, Endocrine, Genitourinary, Injury, Musculoskeletal, Neoplasm}",{Hypertension},{Acute_renal_failure},{none}
+10067,160442,"{Blood_disorder, Cardiac_arrhythmia}","{Blood, Cardiovascular, Injury, Musculoskeletal}",{Arrhythmia},{Anaemia},{External_cause}
+10069,146672,"{Congestive_heart_failure, Diabetes, Metabolic_disorder}","{Cardiovascular, Endocrine, Infectious, Nervous, Respiratory, Symptoms}",{Heart_failure},{Respiratory_failure},{none}
+10074,170119,"{Blood_disorder, Cardiac_arrhythmia, Metabolic_disorder}","{Blood, Cardiovascular, Digestive, Endocrine, Genitourinary, Infectious}",{Arrhythmia},"{Acute_renal_failure, Anaemia}",{none}
+10076,198503,"{Blood_disorder, Cancer, Metabolic_disorder, Sepsis_infection}","{Blood, Endocrine, Genitourinary, Infectious, Injury, Neoplasm, Respiratory, Symptoms}",{none},"{Acute_renal_failure, Anaemia, Respiratory_failure, Severe_sepsis}",{External_cause}
+10083,134993,"{Blood_disorder, Congestive_heart_failure, Mental_disorder, Metabolic_disorder}","{Blood, Cardiovascular, Digestive, Endocrine, Genitourinary, Infectious, Injury, Symptoms}",{Heart_failure},{Anaemia},{Drug_resistant_organism}
+10088,149044,"{Blood_disorder, Cerebrovascular, Congestive_heart_failure, Mental_disorder, Sepsis_infection}","{Blood, Cardiovascular, Genitourinary, Infectious, Injury, Mental, Nervous, Symptoms}","{Heart_failure, Peripheral_vascular, Stroke}","{Anaemia, Septic_shock, Severe_sepsis}","{Drug_resistant_organism, Personal_history_disease, Prior_procedure}"
+10088,168233,"{Cancer, Cardiac_arrhythmia, Cerebrovascular, Congestive_heart_failure, Coronary_artery_disease, Hypertension, Mental_disorder, Metabolic_disorder}","{Cardiovascular, Digestive, Endocrine, Genitourinary, Infectious, Mental, Neoplasm, Nervous, Respiratory}","{Arrhythmia, CAD, Heart_failure, Hypertension, Peripheral_vascular, Stroke}","{Acute_renal_failure, Respiratory_failure}","{Drug_resistant_organism, Personal_history_disease, Prior_procedure}"
+10088,169938,"{Blood_disorder, Congestive_heart_failure, Hypertension, Mental_disorder, Metabolic_disorder, Sepsis_infection}","{Blood, Cardiovascular, Digestive, Endocrine, Genitourinary, Infectious, Injury, Respiratory, Symptoms}","{Heart_failure, Hypertension, Peripheral_vascular}","{Anaemia, Respiratory_failure, Septic_shock, Severe_sepsis}","{Personal_history_disease, Prior_procedure}"
+10089,190301,{Hypertension},"{Cardiovascular, Infectious, Respiratory}",{Hypertension},{none},{Prior_procedure}
+10090,176805,"{Blood_disorder, Mental_disorder}","{Blood, Injury, Mental, Symptoms}",{none},{Anaemia},{External_cause}
+10093,165393,"{Coronary_artery_disease, Hypertension, Metabolic_disorder}","{Cardiovascular, Digestive, Endocrine, Genitourinary, Symptoms}","{CAD, Hypertension, Peripheral_vascular}",{Acute_renal_failure},{none}
+10094,122928,"{Congestive_heart_failure, Diabetes, Metabolic_disorder, Sepsis_infection}","{Cardiovascular, Endocrine, Infectious, Injury, Respiratory}",{Heart_failure},{Severe_sepsis},{none}
+10094,168074,"{Cancer, Congestive_heart_failure, Diabetes, Mental_disorder, Metabolic_disorder}","{Cardiovascular, Endocrine, Genitourinary, Infectious, Mental, Neoplasm}",{Heart_failure},{Acute_renal_failure},{none}
+10098,180685,{none},"{Cardiovascular, Injury}",{none},{none},{External_cause}
 10101,142539,{Cancer},{Neoplasm},{none},{none},{none}
-10102,164869,"{Cancer,Sepsis_infection}","{Neoplasm,Digestive,Blood,Infectious}",{none},"{Coagulopathy,Anaemia}",{none}
-10104,177678,"{Metabolic_disorder,Pulmonary_disease}","{Genitourinary,Cardiovascular,Endocrine,Musculoskeletal}",{Hypertension},{Anaemia},{none}
-10106,133283,{Diabetes},"{Digestive,Endocrine}",{none},{none},{none}
-10111,174739,"{Cardiac_arrhythmia,Congestive_heart_failure,Pulmonary_disease}","{Cardiovascular,Respiratory}","{Heart_failure,Arrhythmia}","{Respiratory_failure,Acute_renal_failure}",{none }
+10102,164869,"{Blood_disorder, Cancer, Metabolic_disorder}","{Blood, Digestive, Endocrine, Infectious, Neoplasm, Respiratory, Symptoms}",{none},{Anaemia},{none}
+10104,177678,"{Hypertension, Metabolic_disorder, Pulmonary_disease}","{Cardiovascular, Endocrine, Genitourinary, Infectious, Musculoskeletal, Respiratory, Symptoms}",{Hypertension},{none},{none}
+10106,133283,"{Diabetes, Hypertension, Pulmonary_disease}","{Cardiovascular, Endocrine, Infectious, Mental, Respiratory}",{Hypertension},{none},{none}
+10111,174739,"{Cardiac_arrhythmia, Congestive_heart_failure}","{Cardiovascular, Genitourinary, Infectious, Respiratory}","{Arrhythmia, Heart_failure}","{Acute_renal_failure, Respiratory_failure}",{none}
