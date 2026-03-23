@@ -1,0 +1,50 @@
+gene,Y1_cellular_location,Y2_growth_condition,Y3_stress_response,Y4_interaction_type,Y5_functional_class,n_Y1,n_Y2,n_Y3,n_Y4,n_Y5
+ACT1,"{cytoplasm, nucleus}","{aerobic, glucose, glycerol}","{heat, osmotic}",{protein_binding},"{signaling, structure}",2,3,2,1,2
+TUB1,"{cytoplasm, nucleus}","{aerobic, glucose}","{heat, osmotic}","{metal_binding, protein_binding}",{structure},2,2,2,2,1
+TUB2,"{cytoplasm, nucleus}","{aerobic, glucose}",{osmotic},"{metal_binding, protein_binding}",{structure},2,2,1,2,1
+TPM1,{cytoplasm},"{aerobic, glucose, glycerol}","{heat, osmotic}",{protein_binding},{structure},1,3,2,1,1
+MYO2,"{cytoplasm, membrane}","{aerobic, glucose}",{osmotic},"{metal_binding, protein_binding}","{signaling, transport}",2,2,1,2,2
+CDC28,"{cytoplasm, nucleus}","{aerobic, glucose}","{DNA_damage, osmotic}",{protein_binding},{signaling},2,2,2,1,1
+CLN2,"{cytoplasm, nucleus}","{aerobic, glucose}",{DNA_damage},{protein_binding},{signaling},2,2,1,1,1
+CLB2,"{cytoplasm, nucleus}","{aerobic, glucose}","{DNA_damage, osmotic}",{protein_binding},{signaling},2,2,2,1,1
+CDC20,"{cytoplasm, nucleus}","{aerobic, glucose}",{DNA_damage},{protein_binding},{signaling},2,2,1,1,1
+MPS1,{nucleus},"{aerobic, glucose}",{DNA_damage},{protein_binding},{signaling},1,2,1,1,1
+RAD52,{nucleus},"{aerobic, glucose}","{DNA_damage, oxidative}","{DNA_binding, protein_binding}",{repair},1,2,2,2,1
+RAD51,{nucleus},"{aerobic, glucose}","{DNA_damage, oxidative}","{DNA_binding, metal_binding, protein_binding}",{repair},1,2,2,3,1
+POL30,{nucleus},"{aerobic, glucose}",{DNA_damage},"{DNA_binding, protein_binding}",{repair},1,2,1,2,1
+LIG4,{nucleus},"{aerobic, glucose}",{DNA_damage},"{DNA_binding, metal_binding}",{repair},1,2,1,2,1
+GAL4,{nucleus},"{aerobic, galactose}",{starvation},"{DNA_binding, protein_binding}",{transcription},1,2,1,2,1
+GCN4,{nucleus},"{aerobic, glucose, starvation}","{heat, nitrogen, oxidative}","{DNA_binding, protein_binding}",{transcription},1,3,3,2,1
+STE12,{nucleus},"{aerobic, glucose}","{heat, osmotic}","{DNA_binding, protein_binding}","{signaling, transcription}",1,2,2,2,2
+MET4,{nucleus},"{aerobic, glucose, starvation}","{nitrogen, oxidative}","{DNA_binding, protein_binding}","{metabolism, transcription}",1,3,2,2,2
+GCR1,{nucleus},"{aerobic, glucose}",{none},{DNA_binding},{transcription},1,2,0,1,1
+GAL80,"{cytoplasm, nucleus}","{aerobic, galactose, glucose}",{none},{protein_binding},"{signaling, transcription}",2,3,0,1,2
+SIR2,"{cytoplasm, nucleus}","{aerobic, glucose, glycerol}","{heat, oxidative}","{metal_binding, protein_binding}","{signaling, transcription}",2,3,2,2,2
+SNF2,{nucleus},"{aerobic, galactose, glucose}",{DNA_damage},"{DNA_binding, protein_binding}","{repair, transcription}",1,3,1,2,2
+SPT16,{nucleus},"{aerobic, glucose}","{DNA_damage, heat}","{DNA_binding, protein_binding}",{transcription},1,2,2,2,1
+SSA1,"{cytoplasm, nucleus}","{aerobic, glucose, glycerol}","{heat, nitrogen, oxidative}",{protein_binding},"{signaling, structure}",2,3,3,1,2
+HSP82,"{cytoplasm, nucleus}","{aerobic, glucose, glycerol}","{heat, oxidative}",{protein_binding},{signaling},2,3,2,1,1
+CPR1,"{cytoplasm, nucleus}","{aerobic, glucose}","{ER_stress, heat}","{metal_binding, protein_binding}",{signaling},2,2,2,2,1
+FUS3,"{cytoplasm, nucleus}","{aerobic, glucose}",{osmotic},{protein_binding},{signaling},2,2,1,1,1
+HOG1,"{cytoplasm, nucleus}","{aerobic, glucose}","{osmotic, oxidative}",{protein_binding},{signaling},2,2,2,1,1
+RAS2,"{cytoplasm, membrane}","{aerobic, galactose, glucose}","{nitrogen, starvation}","{metal_binding, protein_binding}",{signaling},2,3,2,2,1
+TOR1,"{cytoplasm, membrane, vacuole}","{aerobic, glucose, glycerol}","{nitrogen, starvation}",{protein_binding},"{metabolism, signaling}",3,3,2,1,2
+CDC42,"{cytoplasm, membrane}","{aerobic, glucose}",{osmotic},"{metal_binding, protein_binding}","{signaling, structure}",2,2,1,2,2
+STE11,"{cytoplasm, nucleus}","{aerobic, glucose}","{heat, osmotic}",{protein_binding},{signaling},2,2,2,1,1
+SEC18,"{ER, cytoplasm, membrane}","{aerobic, glucose}",{ER_stress},"{metal_binding, protein_binding}",{transport},3,2,1,2,1
+SEC23,"{ER, cytoplasm}","{aerobic, glucose}",{ER_stress},{protein_binding},{transport},2,2,1,1,1
+KAR2,{ER},"{aerobic, glucose}","{ER_stress, heat}","{metal_binding, protein_binding}","{signaling, transport}",1,2,2,2,2
+MNN9,"{ER, membrane}","{aerobic, glucose}",{ER_stress},{protein_binding},"{metabolism, transport}",2,2,1,1,2
+TDH3,{cytoplasm},"{aerobic, anaerobic, glucose}",{oxidative},"{metal_binding, protein_binding}",{metabolism},1,3,1,2,1
+PFK1,{cytoplasm},"{aerobic, anaerobic, glucose}",{none},"{metal_binding, protein_binding}",{metabolism},1,3,0,2,1
+MDH1,{mitochondria},"{aerobic, glycerol}",{oxidative},"{metal_binding, protein_binding}",{metabolism},1,2,1,2,1
+NDI1,{mitochondria},"{aerobic, glycerol}",{oxidative},"{metal_binding, protein_binding}",{metabolism},1,2,1,2,1
+FAS1,{cytoplasm},"{aerobic, glucose}",{none},"{metal_binding, protein_binding}",{metabolism},1,2,0,2,1
+INO1,{cytoplasm},"{aerobic, glucose}",{ER_stress},"{metal_binding, protein_binding}",{metabolism},1,2,1,2,1
+PMA1,{membrane},"{aerobic, anaerobic, glucose}","{heat, osmotic}","{metal_binding, protein_binding}",{transport},1,3,2,2,1
+PHO84,{membrane},"{aerobic, starvation}",{nitrogen},{metal_binding},{transport},1,2,1,1,1
+CTR1,{membrane},"{aerobic, glucose}",{oxidative},"{metal_binding, protein_binding}","{metabolism, transport}",1,2,1,2,2
+ATG1,{cytoplasm},"{aerobic, starvation}","{nitrogen, oxidative}",{protein_binding},"{metabolism, signaling}",1,2,2,1,2
+VPS4,"{cytoplasm, vacuole}","{aerobic, glucose}","{nitrogen, starvation}","{metal_binding, protein_binding}",{transport},2,2,2,2,1
+YPT1,"{ER, cytoplasm, membrane}","{aerobic, glucose}",{none},"{metal_binding, protein_binding}","{signaling, transport}",3,2,0,2,2
+ATH1,"{cell_wall, cytoplasm, vacuole}","{aerobic, glucose}","{heat, oxidative}","{metal_binding, protein_binding}",{metabolism},3,2,2,2,1

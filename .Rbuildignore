@@ -1,0 +1,6 @@
+^data$
+^rawdata$
+^inst/results$
+^RSymHOMALS\.Rproj$
+^run_.*\.R$
+^\.gitignore$
