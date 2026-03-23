@@ -5,7 +5,7 @@
 It provides code for fitting Symbolic HOMALS to multi-valued categorical data,
 running the simulation study, reproducing the paper figures, and analyzing the
 two real datasets used in Section 6. The current repository version is
-`0.1.1`, and the development repository is:
+`0.2.1`, and the development repository is:
 
 `https://github.com/hanmingwu1103/RSymHOMALS`
 
