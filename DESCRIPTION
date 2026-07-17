@@ -3,7 +3,7 @@ Type: Package
 Title: Symbolic HOMALS for Multi-Valued Categorical Data
 Version: 0.2.1
 Authors@R: c(person("Han-Ming", "Wu", email = "wuhm@g.nccu.edu.tw", role = c("aut", "cre")),
-    person("Chiun-How", "Kao", role = "aut"))
+    person("Chiun-How", "Kao", email = "maokao25@gmail.com", role = "aut"))
 Author: Han-Ming Wu [aut, cre],
   Chiun-How Kao [aut]
 Maintainer: Han-Ming Wu <wuhm@g.nccu.edu.tw>
